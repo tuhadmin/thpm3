@@ -10,13 +10,13 @@
 
 </head>
 
-<body style="font-family: Open-Sans;" onload="loadCert()">
+<body id="body" style="font-family: Open-Sans;" onload="loadCert()">
 
 	<div id="prePrint" style="display: block; text-align: center; font-family: 'Open Sans', sans-serif;">
 
 		<h3>"Save as PDF" Instructions:</h3>
 
-		<video controls autoplay>
+		<video id="video" controls autoplay>
 			<source src="./callees/pdf-instructions.mp4" type="video/mp4">
 		</video>
 
@@ -42,7 +42,7 @@
 
 	</div>
 
-	<div id="cert" style="text-align: center; display: none;>
+	<div id="cert" style="text-align: center; display: none;">
 
 		<h1>Certificate of Completion</h1>
 
@@ -92,11 +92,20 @@
 
 <script>
 
+	document.getElementById('body').addEventListener("click", autoWait);
+
 	var autoPrint = true;
 
 	function loadCert() {
 
 		setTimeout(function(){delayPrint(autoPrint);}, 15000);
+
+	}
+
+	function autoWait(){
+
+		console.log("User clicked.");
+		autoPrint = false;
 
 	}
 
@@ -108,7 +117,7 @@
 
 		} else {
 
-			console.log("User already clicked print.");
+			console.log("User intervened the auto print.");
 			return;
 
 		}

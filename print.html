@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Certificate of Completion</title>
+</head>
+
+<body onload="fillFields()">
+
+<div style="text-align: center">
+<h1>Certificate of Completion</h1>
+<hr>
+<p style="font-size: 20px;">This acknowledges that</p>
+
+<h2 id="userName"></h2>
+
+<p style="font-size: 20px;">has successfully completed</p>
+
+<h2 id="moduleName"></h2>
+<p style="font-size: 20px;">from The Hope Project eLearning Series</p>
+    
+<hr>
+<br>
+
+<div style="display: inline-block;">
+	<img src="./callees/TUH-logo.jpeg" width="150px" alt="TUH Logo" style="padding: 15px;">
+	<img src="./callees/York-Opioid-Collaborative-logo.png" width="150px" alt="YOC Logo" style="padding: 15px;">
+	<img src="./callees/PCCD-logo.png" width="150px" alt="PCCD Logo" style="padding: 15px;">
+</div>
+
+<br>
+<br>
+
+<span id="code" style="font-weight: bold;"></span>
+
+<br>
+<br>
+
+<input type="button" value="Print" style="font-size: 40px;" onclick="window.print()"></input>
+
+<br>
+<br>
+<hr>
+<h3>Audio Instructions:</h3>
+<audio controls autoplay id="instructions"> <source src="certificate-print.mp3" type="audio/mpeg">Audio Instructions</audio>
+
+</div>
+</body>
+
+<script>
+	
+	function fillFields (){
+
+	document.getElementById("userName").innerHTML = localStorage.getItem("userName");
+
+	document.getElementById("moduleName").innerHTML = localStorage.getItem("moduleName");
+
+		var name = localStorage.getItem("userName");
+
+		var fNameValue = localStorage.getItem("userName").split(" ",  2)[0].toString().length * 3;
+		var lNameValue = localStorage.getItem("userName").split(" ",  2)[1].toString().length * 3;
+
+		var completionCode = "Code: " + "THPM3" + fNameValue + lNameValue;
+		
+		document.getElementById("code").innerHTML = completionCode;
+
+	window.print();
+
+}
+
+</script>
+
+
+</html>

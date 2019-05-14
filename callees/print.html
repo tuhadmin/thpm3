@@ -1,58 +1,135 @@
 <!DOCTYPE html>
+
 <html>
+
 <head>
-<title>Certificate of Completion</title>
+
+	<title>Certificate of Completion</title>
+
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+
 </head>
 
-<body onload="fillFields()">
+<body style="font-family: Open-Sans;" onload="loadCert()">
 
-<div style="text-align: center">
-<h1>Certificate of Completion</h1>
-<hr>
-<p style="font-size: 20px;">This acknowledges that</p>
+	<div id="prePrint" style="display: block; text-align: center; font-family: 'Open Sans', sans-serif;">
 
-<h2 id="userName"></h2>
+		<h3>"Save as PDF" Instructions:</h3>
 
-<p style="font-size: 20px;">has successfully completed</p>
+		<video controls autoplay>
+			<source src="./callees/pdf-instructions.mp4" type="video/mp4">
+		</video>
 
-<h2 id="moduleName"></h2>
-<p style="font-size: 20px;">from The Hope Project eLearning Series</p>
-    
-<hr>
-<br>
+		<br>
+		<br>
 
-<div style="display: inline-block;">
-	<img src="./callees/TUH-logo.jpeg" width="150px" alt="TUH Logo" style="padding: 15px;">
-	<img src="./callees/York-Opioid-Collaborative-logo.png" width="150px" alt="YOC Logo" style="padding: 15px;">
-	<img src="./callees/PCCD-logo.png" width="150px" alt="PCCD Logo" style="padding: 15px;">
-</div>
+		<audio controls autoplay id="instructions"> <source src="./callees/certificate-print.mp3" type="audio/mpeg">Audio Instructions</audio>
 
-<br>
-<br>
+		<br>
+		<br>
 
-<span id="code" style="font-weight: bold;"></span>
+		<hr>
 
-<br>
-<br>
+		<br>
+		<br>
 
-<input type="button" value="Print" style="font-size: 40px;" onclick="window.print()"></input>
+		<input style="font-size: 25px; width: auto; height: auto;" type="button" onclick="fillFields()" value="Print Certificate">
 
-<br>
-<br>
-<hr>
-<h3>Audio Instructions:</h3>
-<audio controls autoplay id="instructions"> <source src="certificate-print.mp3" type="audio/mpeg">Audio Instructions</audio>
+		<br>
+		<br>
 
-</div>
+		<span id="notice" style="font-style: italic; font-size: 16px; display: block;">Select "Print Certificate" when ready.  The print window will automatically open in 15 seconds, if no action is taken.</span>
+
+	</div>
+
+	<div id="cert" style="text-align: center; display: none;>
+
+		<h1>Certificate of Completion</h1>
+
+		<hr>
+
+		<p style="font-size: 20px;">This acknowledges that</p>
+
+		<h2 id="userName"></h2>
+
+		<p style="font-size: 20px;">has successfully completed</p>
+
+		<h2 id="moduleName"></h2>
+		<p style="font-size: 20px;">from The Hope Project eLearning Series</p>
+		    
+		<hr>
+		<br>
+
+		<div style="display: inline-block;">
+			<img src="./callees/TUH-logo.jpeg" width="150px" alt="TUH Logo" style="padding: 15px;">
+			<img src="./callees/York-Opioid-Collaborative-logo.png" width="150px" alt="YOC Logo" style="padding: 15px;">
+			<img src="./callees/PCCD-logo.png" width="150px" alt="PCCD Logo" style="padding: 15px;">
+		</div>
+
+		<br>
+		<br>
+
+		<span id="code" style="font-weight: bold;"></span>
+
+		<br>
+		<br>
+
+		<hr>
+
+		<br>
+		<br>
+
+		<input style="font-size: 25px; width: auto; height: auto;" type="button" value="Print Certificate" style="font-size: 40px;" onclick="window.print()">
+
+		<br>
+		<br>
+
+		<input style="font-size: 25px; width: auto; height: auto;" type="button" value="Back to Instructions" style="font-size: 40px;" onclick="showInstructions()">
+
+	</div>
+
 </body>
 
 <script>
+
+	var autoPrint = true;
+
+	function loadCert() {
+
+		setTimeout(function(){delayPrint(autoPrint);}, 15000);
+
+	}
+
+	function delayPrint(autoPrint){
+
+		if (autoPrint) {
+
+			fillFields();
+
+		} else {
+
+			console.log("User already clicked print.");
+			return;
+
+		}
+
+	}
 	
 	function fillFields (){
 
-	document.getElementById("userName").innerHTML = localStorage.getItem("userName");
+		autoPrint = false;
 
-	document.getElementById("moduleName").innerHTML = localStorage.getItem("moduleName");
+		var prePrint = document.getElementById("prePrint");
+
+		var cert = document.getElementById("cert");
+
+		cert.style.display = "block";
+
+		prePrint.style.display = "none";
+
+		document.getElementById("userName").innerHTML = localStorage.getItem("userName");
+
+		document.getElementById("moduleName").innerHTML = localStorage.getItem("moduleName");
 
 		var name = localStorage.getItem("userName");
 
@@ -63,9 +140,25 @@
 		
 		document.getElementById("code").innerHTML = completionCode;
 
-	window.print();
+		window.print();
 
-}
+	}
+
+ function showInstructions(){
+
+	var prePrint = document.getElementById("prePrint");
+
+	var cert = document.getElementById("cert");
+
+	var notice = document.getElementById("notice");
+
+	cert.style.display = "none";
+
+	prePrint.style.display = "block";
+
+	notice.style.display = "none";
+
+ }
 
 </script>
 

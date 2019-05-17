@@ -1,29 +1,35 @@
 <!DOCTYPE html>
 
 <html>
-
+	
 <head>
 
 	<title>Certificate of Completion</title>
 
-	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans">
 
 </head>
+    
+    <body id="body" style="font-family: Open-Sans;">
+        
+    <div id="preInst" style="display: flex; align-items: center; justify-content: center; height: 100%; ">
 
-<body id="body" style="font-family: Open-Sans;" onload="loadCert()">
+    	<input style="font-size: 30px; padding: 50px;" type="button" value="Proceed to Print Instructions" onclick="loadCert()">
 
-	<div id="prePrint" style="display: block; text-align: center; font-family: 'Open Sans', sans-serif;">
+    </div>
+
+	<div id="prePrint" style="display: none; text-align: center;">
 
 		<h3>"Save as PDF" Instructions:</h3>
 
-		<video id="video" controls autoplay>
+		<video id="video" controls="" autoplay="">
 			<source src="./callees/pdf-instructions.mp4" type="video/mp4">
 		</video>
 
 		<br>
 		<br>
 
-		<audio controls autoplay id="instructions"> <source src="./callees/certificate-print.mp3" type="audio/mpeg">Audio Instructions</audio>
+		<audio controls="" autoplay="" id="instructions"> <source src="./callees/certificate-print.mp3" type="audio/mpeg">Audio Instructions</audio>
 
 		<br>
 		<br>
@@ -38,7 +44,7 @@
 		<br>
 		<br>
 
-		<span id="notice" style="font-style: italic; font-size: 16px; display: block;">Select "Print Certificate" when ready.  The print window will automatically open in 15 seconds, if no action is taken.</span>
+		<span id="notice" style="font-style: italic; font-size: 16px; display: none;">Select "Print Certificate" when ready.  The print window will automatically open in 15 seconds, if no action is taken.</span>
 
 	</div>
 
@@ -50,11 +56,11 @@
 
 		<p style="font-size: 20px;">This acknowledges that</p>
 
-		<h2 id="userName"></h2>
+		<h2 id="userName">Sean Maxwell</h2>
 
 		<p style="font-size: 20px;">has successfully completed</p>
 
-		<h2 id="moduleName"></h2>
+		<h2 id="moduleName">Module 1: The Disease of Addiction</h2>
 		<p style="font-size: 20px;">from The Hope Project eLearning Series</p>
 		    
 		<hr>
@@ -79,16 +85,16 @@
 		<br>
 		<br>
 
-		<input style="font-size: 25px; width: auto; height: auto;" type="button" value="Print Certificate" style="font-size: 40px;" onclick="window.print()">
+		<input style="font-size: 25px; width: auto; height: auto;" type="button" value="Print Certificate" onclick="window.print()">
 
 		<br>
 		<br>
 
-		<input style="font-size: 25px; width: auto; height: auto;" type="button" value="Back to Instructions" style="font-size: 40px;" onclick="showInstructions()">
+		<input style="font-size: 25px; width: auto; height: auto;" type="button" value="Back to Instructions" onclick="showInstructions()">
 
 	</div>
 
-</body>
+
 
 <script>
 
@@ -97,6 +103,10 @@
 	var autoPrint = true;
 
 	function loadCert() {
+
+		console.log("loadCert() Function called");
+
+		showPrePrint();
 
 		setTimeout(function(){delayPrint(autoPrint);}, 15000);
 
@@ -153,6 +163,18 @@
 
 	}
 
+function showPrePrint(){
+
+	var preInst = document.getElementById("preInst");
+
+	var prePrint = document.getElementById("prePrint");
+
+	preInst.style.display = "none";
+
+	prePrint.style.display = "block";
+
+ }
+
  function showInstructions(){
 
 	var prePrint = document.getElementById("prePrint");
@@ -171,5 +193,6 @@
 
 </script>
 
+</body>
 
 </html>

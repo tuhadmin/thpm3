@@ -22,14 +22,16 @@
 
 		<h3>"Save as PDF" Instructions:</h3>
 
-		<video id="video" controls="" autoplay="">
+		<video id="video" controls autoplay>
 			<source src="./callees/pdf-instructions.mp4" type="video/mp4">
 		</video>
 
 		<br>
 		<br>
 
-		<audio controls="" autoplay="" id="instructions"> <source src="./callees/certificate-print.mp3" type="audio/mpeg">Audio Instructions</audio>
+		<audio controls autoplay id="instructions">
+			<source src="./callees/certificate-print.mp3" type="audio/mpeg">Audio Instructions/>
+		</audio>
 
 		<br>
 		<br>
@@ -98,7 +100,7 @@
 
 <script>
 
-	document.getElementById('body').addEventListener("click", autoWait);
+	document.getElementById('prePrint').addEventListener("click", autoWait);
 
 	var autoPrint = true;
 
@@ -158,6 +160,15 @@
 		var completionCode = "Code: " + "THPM3" + fNameValue + lNameValue;
 		
 		document.getElementById("code").innerHTML = completionCode;
+		
+		var video = document.getElementById("video");
+	
+		var instructions = document.getElementById("instructions");
+
+		video.pause();
+		instructions.pause();
+		video.currentTime = 0;
+		instructions.currentTime = 0;
 
 		window.print();
 
@@ -168,10 +179,18 @@ function showPrePrint(){
 	var preInst = document.getElementById("preInst");
 
 	var prePrint = document.getElementById("prePrint");
+	
+	var video = document.getElementById("video");
+	
+	var instructions = document.getElementById("instructions");
 
 	preInst.style.display = "none";
 
 	prePrint.style.display = "block";
+	
+	video.play();
+	
+	instructions.play();
 
  }
 
